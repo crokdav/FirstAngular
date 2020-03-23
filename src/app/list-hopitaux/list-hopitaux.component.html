@@ -1,0 +1,21 @@
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Ville</th>
+        <th>Adresse</th>
+        <th>Supprimer</th>
+        <th>Modifier</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let unhopital of listHopitaux">
+            <td>{{unhopital.idHopital}}</td>
+            <td>{{unhopital.nomHopital}}</td>
+            <td>{{unhopital.ville}}</td>
+            <td>{{unhopital.adresse}}</td>
+           <td><button name="supprimer" (click)="deletHopital(unhopital.idHopital)" type="button" class="btn btn-danger">Supprimer  <i class="fa fa-times-circle"></i></button></td>
+           <td> <a [routerLink]="['/updatehopital/',unhopital.idHopital]" type="button" class="btn btn-info">Modifier</a>
+        </tr>
+    </tbody>
+</table>
+

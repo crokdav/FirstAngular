@@ -1,0 +1,20 @@
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <th>ID</th>
+        <th>Nom</th>
+        <th>specialite</th>
+        <th>Hopital</th>
+        <th>Supprimer</th>
+        <th>Modifier</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let unmedecin of listMedecins">
+            <td>{{unmedecin.idMedecin}}</td>
+            <td>{{unmedecin.nomMedecin}}</td>
+            <td>{{unmedecin.specialite}}</td>
+            <td>{{unmedecin?.hopital?.nomHopital}}</td>
+            <button name="supprimer" (click)="deletMedecin(unmedecin.idMedecin)" type="button" class="btn btn-danger">Supprimer  <i class="fa fa-times-circle"></i></button>
+            <td> <a [routerLink]="['/updatemedecin/',unmedecin.idMedecin]" type="button" class="btn btn-info">Modifier</a>
+        </tr>
+    </tbody>
+</table>
