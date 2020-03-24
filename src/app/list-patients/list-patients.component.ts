@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Patient} from '../models/patient';
 import {PatientService} from '../services/patient.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-patients',
@@ -20,8 +21,46 @@ export class ListPatientsComponent implements OnInit {
     )
   }
   deletPatient(idPAtient : number){
-    this.patientService.deletePatient(idPAtient).subscribe(
-      data=> {console.log(data)}
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Etes vous sur de vouloir le supprimer ?',
+      text: "Les données seront supprimées",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Continuer',
+      cancelButtonText: 'Retour',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.patientService.deletePatient(idPAtient).subscribe(
+          data=> {
+        swalWithBootstrapButtons.fire(
+          'Supprimer!',
+          'votre fichier a bien été supprimer.',
+          'success'
+        )
+      }
+      )
+      window.location.href = "http://localhost:4200/medecin"
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'non supprimé',
+          'Vos données sont sauves',
+          'error'
+        )
+      }
+    }
     )
   }
+
 }

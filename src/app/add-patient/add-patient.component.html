@@ -10,11 +10,11 @@
         </div>
         <div class="form-group">
           <label for="medecin">Le sauveur</label>
-          <select class="form-control" name="medecins" id="medecin"[(ngModel)]="newPatient.medecin">
+          <select  class="form-control" name="medecins" id="medecin"[(ngModel)]="newPatient.medecin">
           <option *ngFor="let unmedecin of listMedecins" [ngValue]="unmedecin">{{ unmedecin.nomMedecin }}</option>
           </select>
         </div>
-        <button type="submit" (click)="createPatient()" class="btn btn-primary">Submit</button>
+        <button type="submit" (click)="createPatient()" class="btn btn-primary" >Submit</button>
       </form>
     </div>
     
